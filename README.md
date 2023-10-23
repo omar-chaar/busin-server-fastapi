@@ -7,6 +7,7 @@
   - [About](#about)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Usage](#usage)
   - [License](#license)
 
 ## About
@@ -22,6 +23,10 @@ This is a simple server made with FastAPI to be used with the [busin-app](https:
 
 1. Clone the repository
 2. Install the dependencies with `pipenv install -r requirements.txt`
+
+## Usage
+
+1. Run the server with `uvicorn main:server --reload`
 
 ## License
 

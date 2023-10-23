@@ -1,7 +1,8 @@
+import uvicorn
 from fastapi import FastAPI
 
-app = FastAPI()
+server = FastAPI()
 
-@app.get("/")
+@server.get("/")
 def index():
     return {"name":"First Data"}
