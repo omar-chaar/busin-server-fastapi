@@ -1,4 +1,5 @@
 import uvicorn
+from server.model import PostSchema
 from fastapi import FastAPI
 
 server = FastAPI()
