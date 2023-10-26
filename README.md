@@ -16,13 +16,13 @@ This is a simple server made with FastAPI to be used with the [busin-app](https:
 
 ## Prerequisites
 
-- Python 3.8
-- Pipenv
+- Python 3.4+
+- pip
 
 ## Installation
 
 1. Clone the repository
-2. Install the dependencies with `pipenv install -r requirements.txt`
+2. Install the dependencies with `pip install -r requirements.txt`
 
 ## Usage
 
