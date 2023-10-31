@@ -16,7 +16,7 @@ This is a simple server made with FastAPI to be used with the [busin-app](https:
 
 ## Prerequisites
 
-- Python 3.4+
+- Python 3.9+
 - pip
 
 ## Installation
