@@ -1,4 +1,4 @@
-fastapi
-passlib
-pydantic
-uvicorn
+fastapi == 0.104.1
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
