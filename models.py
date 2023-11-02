@@ -1,5 +1,7 @@
-
-
+from sqlalchemy import Column, ForeignKey, String, TIMESTAMP, text
+from sqlalchemy.dialects.mysql import INTEGER, LONGBLOB, TINYINT  
+from sqlalchemy.orm import relationship
+from database import Base
 class Company(Base):
     __tablename__ = 'Company'
 
