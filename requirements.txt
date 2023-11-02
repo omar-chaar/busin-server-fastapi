@@ -1,4 +1,7 @@
 fastapi == 0.104.1
+uvicorn
+sqlalchemy
+pymysql
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
