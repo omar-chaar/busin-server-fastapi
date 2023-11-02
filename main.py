@@ -1,11 +1,11 @@
 import uvicorn
-from model import PostSchema
 from fastapi import FastAPI
-import auth
 
-server = FastAPI()
-server.include_router(auth.router)
+app = FastAPI()
 
-@server.get("/")
-def index():
-    return {"name":"First Data"}
+@app.get("/")
+async def root():
+    return {"message": "Hello from FastAPI!"}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
