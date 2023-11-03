@@ -23,10 +23,15 @@ This is a simple server made with FastAPI to be used with the [busin-app](https:
 
 1. Clone the repository
 2. Install the dependencies with `pip install -r requirements.txt`
+3. Create a config.py file with the following settings:
+
+```python
+URL_DATABASE = mysql+pymysql://user:password@localhost/dbname
+```
 
 ## Usage
 
-1. Run the server with `uvicorn main:server --reload`
+1. Run the server with `python main.py`
 
 ## License
 
