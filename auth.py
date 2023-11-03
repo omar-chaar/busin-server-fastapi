@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from starlette import status
 from typing import Annotated
-
+from database.database import SessionLocal
+import database.models as models
 router = APIRouter(
     prefix="/auth",
     tags=["auth"],
@@ -36,7 +37,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_user(db: db_dependency, create_user_request: CreateUserRequest):
-    create_user_model = Users(username=request.username, password=bcrypt_context.hash(request.password))
+    create_user_model = models.User(username=create_user_request.username, password=bcrypt_context.hash(create_user_request.password))
     
     db.add(create_user_model)
     db.commit()
