@@ -8,5 +8,8 @@
     ],
     "env": {
       "APP_MODULE": "main:app"
+    },
+    "git": {
+      "deploymentEnabled": false
     }
   }
