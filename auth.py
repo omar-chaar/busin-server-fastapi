@@ -7,20 +7,21 @@ from starlette import status
 from typing import Annotated
 from database.database import SessionLocal
 import database.models as models
+from config import SECRET_KEY
+
 router = APIRouter(
     prefix="/auth",
     tags=["auth"],
 )
 
-SECRET_KEY = "verysecretkey"
 ALGORITHM = "HS256"
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/auth/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 
 class CreateUserRequest(BaseModel):
-    username: str
-    password: str
+    user_id: str
+    password: str    
 
 class Token(BaseModel):
     access_token: str
@@ -37,7 +38,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_user(db: db_dependency, create_user_request: CreateUserRequest):
-    create_user_model = models.User(username=create_user_request.username, password=bcrypt_context.hash(create_user_request.password))
+    create_user_model = models.User(user_id=create_user_request.user_id, password=bcrypt_context.hash(create_user_request.password))
     
     db.add(create_user_model)
     db.commit()
