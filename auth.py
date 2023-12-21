@@ -21,7 +21,16 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 
 class CreateUserRequest(BaseModel):
     user_id: str
-    password: str    
+    name: str
+    surname: str
+    position: str
+    email: str
+    password: str
+    profile_picture: str
+    department_id: int
+    is_adm: bool
+    is_owner: bool
+    reg_code: str
 
 class Token(BaseModel):
     access_token: str
@@ -38,7 +47,9 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_user(db: db_dependency, create_user_request: CreateUserRequest):
-    create_user_model = models.USER_AUTH(user_id=create_user_request.user_id, password=bcrypt_context.hash(create_user_request.password))
+    create_user_model = models.User(user_id=create_user_request.user_id, name=create_user_request.name, surname=create_user_request.surname, 
+    position=create_user_request.position, email=create_user_request.email, password=bcrypt_context.hash(create_user_request.password), profile_picture=create_user_request.profile_picture, department_id=create_user_request.department_id,
+     is_adm=create_user_request.is_adm, is_owner=create_user_request.is_owner, reg_code=create_user_request.reg_code)
     
     db.add(create_user_model)
     db.commit()

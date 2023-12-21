@@ -10,13 +10,6 @@ class Company(Base):
     name = Column(String(50))
 
 
-class USERAUTH(Base):
-    __tablename__ = 'USER_AUTH'
-
-    user_id = Column(INTEGER(36), primary_key=True)
-    PASSWORD = Column(String(225))
-
-
 class Department(Base):
     __tablename__ = 'Department'
 
