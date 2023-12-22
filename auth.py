@@ -72,8 +72,8 @@ def authenticate_user(db, email: str, password: str):
         return False
     return user  
 
-def create_access_token(username: str, user_id: int, expires_delta: Optional[timedelta] = None):
-    to_encode = {"username": username, "user_id": user_id}
+def create_access_token(email: str, user_id: int, expires_delta: Optional[timedelta] = None):
+    to_encode = {"email": email, "user_id": user_id}
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
@@ -81,3 +81,21 @@ def create_access_token(username: str, user_id: int, expires_delta: Optional[tim
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
+async def get_current_user(token: str = Depends(oauth2_scheme), db: db_dependency = Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("email")
+        user_id: int = payload.get("user_id")
+        if username is None or user_id is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if user is None:
+        raise credentials_exception
+    return user
