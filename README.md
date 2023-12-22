@@ -28,6 +28,7 @@ This is a simple server made with FastAPI to be used with the [busin-app](https:
 ```python
 URL_DATABASE = mysql+pymysql://user:password@localhost/dbname
 SECRET_KEY = "verysecretkey"
+ALGORITHM = "HS256"
 ```
 
 ## Usage
