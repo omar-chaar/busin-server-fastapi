@@ -64,6 +64,9 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
             detail="Incorrect email or password"
         )
     token = create_access_token(user.username, user.id, timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+
+    return {"access_token": token, "token_type": "bearer"}
+
 def authenticate_user(db, email: str, password: str):
     user = db.query(models.User).filter(models.User.email == email).first()
     if not user:
