@@ -15,7 +15,8 @@ async def root(db: Session = Depends(auth.get_db)):
         db.execute(text("SELECT 1"))
         return {"message": "API connected to the database"}
     except Exception as e:
-        return {"message": f"Failed to connect to the database: {e.args[0].replace('(', '').replace(')', '')}"}
+        message = e.args[0].replace('(', '').replace(')', '').replace("'", '').replace('"', '').replace('\\', '')
+        return {"message": f"Failed to connect to the database: {message}"}
 
 
 if __name__ == "__main__":
