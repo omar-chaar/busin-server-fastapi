@@ -4,10 +4,11 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from starlette import status
-from typing import Annotated
+from typing import Annotated, Optional
 from database.database import SessionLocal
 import database.models as models
 from config import SECRET_KEY, ALGORITHM
+from datetime import timedelta
 
 router = APIRouter(
     prefix="/auth",
